@@ -64,8 +64,6 @@ class MainActivity : ComponentActivity() {
                    "123456789"
             )
             loginViewModel.login(authRequest)
-
-            productsViewModel.getProducts()
         }
     }
 }

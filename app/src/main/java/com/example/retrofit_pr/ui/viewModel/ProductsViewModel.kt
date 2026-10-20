@@ -15,10 +15,12 @@ class ProductsViewModel(val tokenManager: TokenManager): ViewModel() {
                 val token = tokenManager.tokenFlow().first()
                 token?.let {
                     val productResponse = RetrofitClient.productsService.getProducts(token)
-                    for (item in productResponse.items!!) {
-                        Log.d("ProductsViewModel", "id = ${item.id}\n" +
-                                "title = ${item.title}\n" +
-                                "price = ${item.price}")
+                    productResponse.items?.let {
+                        for (item in productResponse.items) {
+                            Log.d("ProductsViewModel", "id = ${item.id}\n" +
+                                    "title = ${item.title}\n" +
+                                    "price = ${item.price}")
+                        }
                     }
                 }
             } catch (e: Exception) {
