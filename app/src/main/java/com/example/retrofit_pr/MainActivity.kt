@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.retrofit_pr.data.TokenManager
 import com.example.retrofit_pr.data.model.AuthRequest
 import com.example.retrofit_pr.data.model.Post
+import com.example.retrofit_pr.ui.screen.ProductScreen
 import com.example.retrofit_pr.ui.viewModel.LoginViewModel
 import com.example.retrofit_pr.ui.viewModel.PostsViewModel
 import com.example.retrofit_pr.ui.viewModel.ProductsViewModel
@@ -64,6 +65,7 @@ class MainActivity : ComponentActivity() {
                    "123456789"
             )
             loginViewModel.login(authRequest)
+            ProductScreen()
         }
     }
 }
