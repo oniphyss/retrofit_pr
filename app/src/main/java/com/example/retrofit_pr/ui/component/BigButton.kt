@@ -46,6 +46,6 @@ fun BigButton(modifier: Modifier = Modifier,
 private fun BigButtonPreview() {
     BigButton(
         onClick = {},
-        text = ""
+        text = "Текст"
     )
 }

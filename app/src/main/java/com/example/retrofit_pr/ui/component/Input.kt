@@ -2,6 +2,7 @@ package com.example.retrofit_pr.ui.component
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -20,12 +21,14 @@ import com.example.retrofit_pr.ui.theme.Border
 import com.example.retrofit_pr.ui.theme.DisabledField
 import com.example.retrofit_pr.ui.theme.Primary
 import com.example.retrofit_pr.ui.theme.PrimaryUnfocused
+import com.example.retrofit_pr.ui.theme.TextSecondary
 import com.example.retrofit_pr.ui.theme.White
 
 @Composable
 fun Input(modifier: Modifier = Modifier,
           value: String,
-          onValueChange: (String) -> Unit) {
+          onValueChange: (String) -> Unit,
+          label: String) {
 
     TextField(
         modifier =  modifier
@@ -36,6 +39,10 @@ fun Input(modifier: Modifier = Modifier,
             ),
         value = value,
         onValueChange = onValueChange,
+        label = { Text(
+            text = label,
+            color = TextSecondary
+        ) },
         colors = TextFieldDefaults.colors(
             focusedTextColor = Primary,
             unfocusedTextColor = PrimaryUnfocused,
@@ -53,4 +60,9 @@ fun Input(modifier: Modifier = Modifier,
 @Preview
 @Composable
 private fun InputPreview() {
+    Input(
+        value = "",
+        onValueChange = {},
+        label = "Email"
+    )
 }

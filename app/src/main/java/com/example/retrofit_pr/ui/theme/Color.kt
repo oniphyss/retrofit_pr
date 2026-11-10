@@ -18,3 +18,7 @@ val DisabledField = Color(0xFFF5F5F5)
 val Border = Color(0xFFDBDBDB)
 val White = Color(0xFFFFFFFF)
 val DisabledButton = Color(0xFF999999)
+
+val TextSecondary = Color(0xFF808080)
+
+val Grey = Color(0xFF909090)

@@ -8,9 +8,15 @@ import androidx.activity.viewModels
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.retrofit_pr.data.TokenManager
 import com.example.retrofit_pr.data.model.AuthRequest
 import com.example.retrofit_pr.data.model.Post
+import com.example.retrofit_pr.ui.Login
+import com.example.retrofit_pr.ui.Products
+import com.example.retrofit_pr.ui.screen.LoginScreen
 import com.example.retrofit_pr.ui.screen.ProductScreen
 import com.example.retrofit_pr.ui.viewModel.LoginViewModel
 import com.example.retrofit_pr.ui.viewModel.PostsViewModel
@@ -24,6 +30,21 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val tokenManager = TokenManager(applicationContext)
+        val productsViewModel: ProductsViewModel by viewModels {
+            viewModelFactory {
+                initializer {
+                    ProductsViewModel(tokenManager)
+                }
+            }
+        }
+
+        val loginViewModel: LoginViewModel by viewModels {
+            viewModelFactory {
+                initializer {
+                    LoginViewModel(tokenManager, productsViewModel)
+                }
+            }
+        }
 
         setContent {
 //            val usersViewModel: UsersViewModel = viewModel()
@@ -44,28 +65,20 @@ class MainActivity : ComponentActivity() {
 //            val usersViewModel: UsersViewModel = viewModel()
 //            usersViewModel.deleteUser(18)
 
-            val productsViewModel: ProductsViewModel by viewModels {
-                viewModelFactory {
-                    initializer {
-                        ProductsViewModel(tokenManager)
-                    }
-                }
-            }
+//            val authRequest = AuthRequest(
+//                    "schast@example.com",
+//                   "123456789"
+//            )
+//            loginViewModel.login(authRequest)
+//            ProductScreen()
 
-            val loginViewModel: LoginViewModel by viewModels {
-                viewModelFactory {
-                    initializer {
-                        LoginViewModel(tokenManager, productsViewModel)
-                    }
-                }
-            }
+            val navController = rememberNavController()
 
-            val authRequest = AuthRequest(
-                    "schast@example.com",
-                   "123456789"
-            )
-            loginViewModel.login(authRequest)
-            ProductScreen()
+            NavHost(navController = navController, startDestination = Login) {
+                composable<Login> { LoginScreen(viewModel = loginViewModel,
+                    onProductScreen = { navController.navigate(Products) }) }
+                composable<Products> { ProductScreen() }
+            }
         }
     }
 }
