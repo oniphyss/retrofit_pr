@@ -20,14 +20,15 @@ class LoginViewModel(val tokenManager: TokenManager): ViewModel() {
     val errorMessage: StateFlow<String?> = _errorMessage
 
     fun login(authRequest: AuthRequest) {
+        _isSuccessful.value = true
+        _errorMessage.value = null
+
         viewModelScope.launch {
             try {
                 val authResponse = RetrofitClient.loginService.authWithPassword(authRequest)
 
                 authResponse.token?.let {
                     tokenManager.saveToken(it)
-                    _isSuccessful.value = true
-                    _errorMessage.value = null
                 }
             } catch (e: Exception) {
                 Log.e("LoginViewModel", e.message.toString())

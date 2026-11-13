@@ -30,18 +30,19 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         val tokenManager = TokenManager(applicationContext)
-        val productsViewModel: ProductsViewModel by viewModels {
-            viewModelFactory {
-                initializer {
-                    ProductsViewModel(tokenManager)
-                }
-            }
-        }
 
         val loginViewModel: LoginViewModel by viewModels {
             viewModelFactory {
                 initializer {
-                    LoginViewModel(tokenManager, productsViewModel)
+                    LoginViewModel(tokenManager)
+                }
+            }
+        }
+
+        val productsViewModel: ProductsViewModel by viewModels {
+            viewModelFactory {
+                initializer {
+                    ProductsViewModel(tokenManager)
                 }
             }
         }
@@ -77,7 +78,7 @@ class MainActivity : ComponentActivity() {
             NavHost(navController = navController, startDestination = Login) {
                 composable<Login> { LoginScreen(viewModel = loginViewModel,
                     onProductScreen = { navController.navigate(Products) }) }
-                composable<Products> { ProductScreen() }
+                composable<Products> { ProductScreen(viewModel = productsViewModel) }
             }
         }
     }

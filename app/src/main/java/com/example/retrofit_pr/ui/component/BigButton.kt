@@ -24,6 +24,7 @@ fun BigButton(modifier: Modifier = Modifier,
               onClick: () -> Unit,
               text: String) {
     Button(
+        modifier = modifier,
         onClick = onClick,
         shape = RoundedCornerShape(8.dp),
         colors = ButtonColors(
