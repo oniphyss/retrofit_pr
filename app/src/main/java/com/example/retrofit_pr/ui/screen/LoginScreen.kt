@@ -115,7 +115,8 @@ fun LoginScreen(modifier: Modifier = Modifier,
                 )
                 viewModel.login(authRequest)
             },
-            text = "Log in"
+            text = "Log in",
+            enabled = (email.isNotEmpty() && password.isNotEmpty())
         )
     }
 

@@ -22,7 +22,8 @@ import com.example.retrofit_pr.ui.theme.White
 @Composable
 fun BigButton(modifier: Modifier = Modifier,
               onClick: () -> Unit,
-              text: String) {
+              text: String,
+              enabled: Boolean) {
     Button(
         modifier = modifier,
         onClick = onClick,
@@ -32,7 +33,8 @@ fun BigButton(modifier: Modifier = Modifier,
             contentColor = White,
             disabledContainerColor = DisabledButton,
             disabledContentColor = White
-        )
+        ),
+        enabled = enabled
     ) {
         Text(
             text = text,
@@ -40,13 +42,4 @@ fun BigButton(modifier: Modifier = Modifier,
             fontSize = 18.sp,
         )
     }
-}
-
-@Preview
-@Composable
-private fun BigButtonPreview() {
-    BigButton(
-        onClick = {},
-        text = "Текст"
-    )
 }

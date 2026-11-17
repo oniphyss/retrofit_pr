@@ -11,11 +11,14 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.retrofit_pr.data.TokenManager
 import com.example.retrofit_pr.data.model.AuthRequest
 import com.example.retrofit_pr.data.model.Post
+import com.example.retrofit_pr.ui.EditProduct
 import com.example.retrofit_pr.ui.Login
 import com.example.retrofit_pr.ui.Products
+import com.example.retrofit_pr.ui.screen.EditScreen
 import com.example.retrofit_pr.ui.screen.LoginScreen
 import com.example.retrofit_pr.ui.screen.ProductScreen
 import com.example.retrofit_pr.ui.viewModel.LoginViewModel
@@ -78,7 +81,19 @@ class MainActivity : ComponentActivity() {
             NavHost(navController = navController, startDestination = Login) {
                 composable<Login> { LoginScreen(viewModel = loginViewModel,
                     onProductScreen = { navController.navigate(Products) }) }
-                composable<Products> { ProductScreen(viewModel = productsViewModel) }
+                composable<Products> { ProductScreen(viewModel = productsViewModel,
+                    onEditScreen = { productId ->
+                        navController.navigate(EditProduct(productId = productId))
+                    }
+                )
+                }
+                composable<EditProduct> { backStackEntry ->
+                    val route = backStackEntry.toRoute<EditProduct>()
+                    route.productId?.let {
+                        EditScreen(viewModel = productsViewModel,
+                            productId = it)
+                    }
+                }
             }
         }
     }

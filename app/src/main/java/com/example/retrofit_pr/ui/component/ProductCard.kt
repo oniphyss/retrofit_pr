@@ -1,6 +1,5 @@
 package com.example.retrofit_pr.ui.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,10 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -30,7 +25,10 @@ import com.example.retrofit_pr.ui.theme.White
 @Composable
 fun ProductCard(modifier: Modifier = Modifier,
                 productName: String,
-                price: String) {
+                price: String,
+                isEdit: Boolean = false,
+                onPriceChange: (String) -> Unit = {}
+) {
     Column(modifier = modifier
         .background(color = White, shape = RoundedCornerShape(4.dp))
         .padding(8.dp)
@@ -44,13 +42,23 @@ fun ProductCard(modifier: Modifier = Modifier,
             color = DisabledButton
         )
         Spacer(modifier = modifier.height(6.dp))
-        Text(
-            text = "$ $price",
-            fontFamily = FontFamily(Font(R.font.nunito_sans_bold, FontWeight.Bold)),
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp,
-            color = Black
-        )
+
+        if (isEdit) {
+            Input(
+                modifier = modifier,
+                value = price,
+                onValueChange = onPriceChange,
+                label = "Price"
+            )
+        } else {
+            Text(
+                text = "$ $price",
+                fontFamily = FontFamily(Font(R.font.nunito_sans_bold, FontWeight.Bold)),
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = Black
+            )
+        }
     }
 
 }
@@ -58,8 +66,8 @@ fun ProductCard(modifier: Modifier = Modifier,
 @Preview
 @Composable
 private fun ProductCardPrev() {
-    ProductCard(
-        productName = "fff",
-        price = "20"
-    )
+//    ProductCard(
+//        productName = "fff",
+//        price = "20"
+//    )
 }

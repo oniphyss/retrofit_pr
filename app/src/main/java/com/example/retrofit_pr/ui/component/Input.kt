@@ -60,9 +60,9 @@ fun Input(modifier: Modifier = Modifier,
 @Preview
 @Composable
 private fun InputPreview() {
-    Input(
-        value = "",
-        onValueChange = {},
-        label = "Email"
-    )
+//    Input(
+//        value = "",
+//        onValueChange = {},
+//        label = "Email"
+//    )
 }

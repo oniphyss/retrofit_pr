@@ -7,3 +7,6 @@ object Login
 
 @Serializable
 object Products
+
+@Serializable
+data class EditProduct(val productId: String? = null)
