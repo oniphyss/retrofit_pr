@@ -91,7 +91,8 @@ class MainActivity : ComponentActivity() {
                     val route = backStackEntry.toRoute<EditProduct>()
                     route.productId?.let {
                         EditScreen(viewModel = productsViewModel,
-                            productId = it)
+                            productId = it,
+                            onNavigateBack = {navController.popBackStack()})
                     }
                 }
             }

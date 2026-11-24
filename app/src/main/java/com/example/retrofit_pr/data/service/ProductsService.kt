@@ -17,8 +17,8 @@ interface ProductsService {
     suspend fun getProducts(@Header("Authorization") token: String): ProductResponse
 
     @GET("products/records/{id}")
-    suspend fun getProductById(@Path("id") productId: String): Product
+    suspend fun getProductById(@Header("Authorization") token: String, @Path("id") productId: String): Product
 
     @PATCH("products/records/{id}")
-    suspend fun updateProduct(@Path("id") productId: String, @Body product: Product): Product
+    suspend fun updateProduct(@Header("Authorization") token: String, @Path("id") productId: String, @Body product: Product): Product
 }
