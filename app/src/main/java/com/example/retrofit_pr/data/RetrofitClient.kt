@@ -45,4 +45,6 @@ object RetrofitClient {
     val loginService: LoginService = api.create(LoginService::class.java)
 
     val productsService: ProductsService = api.create(ProductsService::class.java)
+
+    val getUser: UsersService = api.create(UsersService::class.java)
 }

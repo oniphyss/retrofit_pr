@@ -75,6 +75,7 @@ class MainActivity : ComponentActivity() {
 //            )
 //            loginViewModel.login(authRequest)
 //            ProductScreen()
+            // id = lxb1qq1skt8rrwp
 
             val navController = rememberNavController()
 
