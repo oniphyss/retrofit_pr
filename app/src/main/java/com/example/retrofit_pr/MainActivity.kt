@@ -18,9 +18,11 @@ import com.example.retrofit_pr.data.model.Post
 import com.example.retrofit_pr.ui.EditProduct
 import com.example.retrofit_pr.ui.Login
 import com.example.retrofit_pr.ui.Products
+import com.example.retrofit_pr.ui.Profile
 import com.example.retrofit_pr.ui.screen.EditScreen
 import com.example.retrofit_pr.ui.screen.LoginScreen
 import com.example.retrofit_pr.ui.screen.ProductScreen
+import com.example.retrofit_pr.ui.screen.ProfileScreen
 import com.example.retrofit_pr.ui.viewModel.LoginViewModel
 import com.example.retrofit_pr.ui.viewModel.PostsViewModel
 import com.example.retrofit_pr.ui.viewModel.ProductsViewModel
@@ -46,6 +48,14 @@ class MainActivity : ComponentActivity() {
             viewModelFactory {
                 initializer {
                     ProductsViewModel(tokenManager)
+                }
+            }
+        }
+
+        val usersViewModel: UsersViewModel by viewModels {
+            viewModelFactory {
+                initializer {
+                    UsersViewModel(tokenManager)
                 }
             }
         }
@@ -94,6 +104,15 @@ class MainActivity : ComponentActivity() {
                         EditScreen(viewModel = productsViewModel,
                             productId = it,
                             onNavigateBack = {navController.popBackStack()})
+                    }
+                }
+                composable<Profile> { backStackEntry ->
+                    val route = backStackEntry.toRoute<Profile>()
+                    route.userId?.let {
+                        ProfileScreen(
+                            viewModel = usersViewModel,
+                            userId = it
+                        )
                     }
                 }
             }

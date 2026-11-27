@@ -42,8 +42,8 @@ fun LoginScreen(modifier: Modifier = Modifier,
                 viewModel: LoginViewModel = viewModel(),
                 onProductScreen: () -> Unit = {}
  ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("schast@example.com") }
+    var password by remember { mutableStateOf("123456789") }
 
     val isSuccessful by viewModel.isSuccessful.collectAsStateWithLifecycle()
     val errorMessage by viewModel.errorMessage.collectAsStateWithLifecycle()

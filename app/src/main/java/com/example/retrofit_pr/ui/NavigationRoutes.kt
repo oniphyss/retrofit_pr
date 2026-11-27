@@ -10,3 +10,6 @@ object Products
 
 @Serializable
 data class EditProduct(val productId: String? = null)
+
+@Serializable
+data class Profile(val userId: String? = null)
